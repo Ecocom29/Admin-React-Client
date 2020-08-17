@@ -1,0 +1,160 @@
+""" Schema para los datos del usuario """
+type Empresa{
+    id: ID
+    empresa: String
+    jefe: String
+    nombres: String
+    apellidos: String
+    correo:String       
+    edad: Int
+    tipo: TipoUsuario
+    password: String
+    sucursales: [Sucursal]
+    giro:String
+    fechaAlta:String
+    esActivo:Int
+}
+
+""" Schema para los datos de las sucursales """
+type Sucursal{
+    nombre:String
+    encargado: String
+    cp: Int
+    calle:String
+    cruzamientos:String
+    numero: String
+    colonia:String
+    ubicacion:String
+    fechaAlta:String
+    esActivo:Int
+}
+
+""" Schema para los datos del negocio """
+type Producto{
+    id:ID
+    nombre:String!
+    precio: Int!
+    stock:Int!
+    marca: ID
+    descripcion:String!
+    categoria:ID
+    fechaAlta: String
+    esActivo: Int
+}
+
+""" Schema para los datos de la categoria """
+type Categoria{
+    id:ID
+    nombre: String!
+    descripcion: String
+    fechaAlta: String!
+    esActivo: Int!
+}
+""" Schema para los datos de la categoria """
+type Marcas{
+    id:ID
+    nombre: String!
+    descripcion: String
+    fechaAlta: String!
+    esActivo: Int!
+}
+
+""" Enumerador para los tipos de usuario """
+enum TipoUsuario {
+    INVITADO
+    ADMINISTRADOR
+}
+
+""" Campos para los usuarios nuevos """
+input EmpresaInput{
+    id: ID
+    empresa: String
+    jefe: String
+    nombres: String
+    apellidos: String
+    correo:String       
+    edad: Int
+    tipo: TipoUsuario
+    password: String
+    sucursales: [SucursalInput]
+    giro:String
+    fechaAlta:String
+    esActivo:Int
+}
+
+""" Campos para los usuarios negocios """
+input SucursalInput{
+    nombre:String
+    encargado: String
+    cp: Int
+    calle:String
+    cruzamientos: String
+    numero: String
+    colonia:String
+    ubicacion:String
+    fechaAlta:String
+    esActivo:Int
+}
+
+""" Campos para los usuarios negocios """
+input ProductoInput{
+    id:ID
+    nombre:String!
+    precio: Int!
+    stock:Int!
+    marca: ID
+    descripcion:String!
+    categoria:ID
+    fechaAlta: String
+    esActivo: Int
+}
+
+""" Schema para los datos de la categoria """
+input CategoriaInput{
+    id:ID
+    nombre: String!
+    descripcion: String
+    fechaAlta: String!
+    esActivo: Int!
+}
+
+""" Schema para los datos de la categoria """
+input MarcasInput{
+    id:ID
+    nombre: String!
+    descripcion: String
+    fechaAlta: String!
+    esActivo: Int!
+}
+
+""" Consulta para obtener los datos del usuario """
+type Query{
+    obtenerEmpresas(limite: Int): [Empresa]
+    getEmpresa(id: ID): Empresa
+
+    obtenerProductos(limite: Int): [Producto]
+
+    obtenerCategorias(limite: Int): [Categoria]
+    obtenerCategoriaActivos(esActivo: Int): [Categoria]
+
+    obtenerMarcas(limite: Int): [Marcas]
+    obtenerMarcasActivos(esActivo: Int): [Marcas]
+    
+}
+
+""" Mutations para crear nuevos usuarios """
+type Mutation{
+    #Mutations para empresas
+    crearEmpresa(empresa: String,jefe:String,nombres:String ,apellidos:String,correo:String,edad:Int,tipo:String,password:String,giro:String): String
+    actualizarEmpresa(input: EmpresaInput): Empresa
+    eliminarEmpresa(id: ID!): String
+
+    #Mutations para productos
+    crearProducto(input: ProductoInput): Producto
+    actualizarProducto(input: ProductoInput): Producto
+    eliminarProducto(id: ID!): String
+
+    crearCategoria(input: CategoriaInput): Categoria
+
+    crearMarca(input: MarcasInput): Marcas
+}
