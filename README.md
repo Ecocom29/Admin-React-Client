@@ -1,2 +1,7 @@
-# Admin-React-Client
-Sistema Administrador de Ventas
+**Sales Management System**
+
+
+Implemented technologies:
+
+- React
+- 
