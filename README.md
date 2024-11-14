@@ -4,4 +4,7 @@
 Implemented technologies:
 
 - React
-- 
+- Apollo Client
+- Mongoose
+- Express
+- GraphQL
